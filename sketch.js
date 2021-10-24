@@ -28,8 +28,8 @@ class Cell {
     //RIGHT line: x+w, y -> x+w, y+w
     //BOTTOM line: x, y+w -> x+w, y+w
     //LEFT line: x, y -> x, y+w
-    stroke(255);
-    strokeWeight(1.5);
+    stroke(0);
+    strokeWeight(1);
     if (this.walls[TOP_WALL]) line(x, y, x + w, y);
     if (this.walls[RIGHT_WALL]) line(x + w, y, x + w, y + w);
     if (this.walls[BOTTOM_WALL]) line(x, y + w, x + w, y + w);
@@ -38,7 +38,7 @@ class Cell {
     if (this.isCurrent) {
       this.isVisited = true;
       noStroke();
-      fill(255, 0, 0);
+      fill(6, 255, 255);
       rect(x, y, w);
     }
   };
