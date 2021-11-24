@@ -23,7 +23,7 @@ class Cell {
     let x = this.x * w;
     let y = this.y * w;
 
-    //DRAW LINES INSTEAD OF RECT FOR LATER USE FOR PATH DRAWING
+    //DRAW LINES INSTEAD OF RECT FOR LATER USE TO DRAW THE PATH.
     //TOP line: x, y -> x+w, y
     //RIGHT line: x+w, y -> x+w, y+w
     //BOTTOM line: x, y+w -> x+w, y+w
@@ -86,7 +86,7 @@ const removeWalls = (destination) => {
       break;
 
     default:
-    // Did nothing
+    // Noop
   }
 };
 
@@ -106,7 +106,6 @@ function setup() {
     }
   }
   current = grid[0];
-  // stack.push(current);
 }
 
 function draw() {
