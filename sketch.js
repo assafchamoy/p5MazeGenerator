@@ -1,4 +1,4 @@
-const w = 10;
+const w = 20;
 let rows,
   cols,
   grid = [],
@@ -9,6 +9,9 @@ const TOP_WALL = 0;
 const RIGHT_WALL = 1;
 const BOTTOM_WALL = 2;
 const LEFT_WALL = 3;
+
+const PERCENTAGE_PLACEHOLDER = '{PERCENTAGE}';
+let percentageView;
 
 class Cell {
   constructor(x, y, isCurrent = false) {
@@ -96,6 +99,8 @@ const index = (x, y) => {
 };
 
 function setup() {
+  percentageView = document.querySelector('.percentageView');
+
   createCanvas(600, 600);
   cols = floor(width / w);
   rows = floor(height / w);
@@ -109,22 +114,27 @@ function setup() {
 }
 
 function draw() {
+  const visitedCellsNumber = grid.filter(cell => cell.isVisited).length;
+  const completePercentage = Math.floor((visitedCellsNumber / grid.length) * 100);
+  percentageView.innerText = `${completePercentage}%`;
+
   background(220);
 
   for (let i = 0; i < grid.length; i++) {
     grid[i].show();
   }
 
-  const nextVisit = current.checkNeighbors(grid);
-
-  current.isCurrent = true;
-
-  if (nextVisit) {
-    nextVisit.isCurrent = true;
-    removeWalls(nextVisit);
-    current = nextVisit;
-    stack.push(current);
-  } else {
-    current = stack.pop();
+  if (current) {
+    const nextVisit = current.checkNeighbors(grid);
+    current.isCurrent = true;
+  
+    if (nextVisit) {
+      nextVisit.isCurrent = true;
+      removeWalls(nextVisit);
+      current = nextVisit;
+      stack.push(current);
+    } else {
+      current = stack.pop();
+    }
   }
 }
